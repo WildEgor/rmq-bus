@@ -76,3 +76,19 @@ export class EventBus {
     }   
 }
 ```
+
+```js
+@RabbitConsumer()
+@Controller()
+export class EventConsumer {
+    
+    @RabbitSubscribe({
+        exchange: 'test_exchange',
+        routingKey: 'test.event',
+        createQueueIfNotExists: true
+    })
+    public async testEvent(@RabbitPayload() payload: ITestPayload): Promise<void> {
+        console.log(payload);
+    }
+}
+```
